@@ -1,0 +1,57 @@
+@import "tailwindcss";
+
+@font-face {
+    font-family: "Poppins";
+    src: url("/assets/fonts/poppins-latin-400-normal.woff2") format("woff2");
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("/assets/fonts/poppins-latin-500-normal.woff2") format("woff2");
+    font-weight: 500;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("/assets/fonts/poppins-latin-600-normal.woff2") format("woff2");
+    font-weight: 600;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: "Poppins";
+    src: url("/assets/fonts/poppins-latin-700-normal.woff2") format("woff2");
+    font-weight: 700;
+    font-display: swap;
+}
+@theme {
+  /* Colors */
+  --color-forest:    #1E5631;
+  --color-cream:     #F5F0E8;
+  --color-ink:       #1A1A1A;
+  --color-amber:     #F0B429;
+  --color-gold:      #F0B429;
+  --color-sienna:    #A0522D;
+  --color-muted:     #E8E3D8;
+  --color-card:      #F5F0E8;
+  --color-ai:        #3B82F6;
+  --color-ai-light:  #EFF6FF;
+  --color-muted-fg:  #6B7280;
+
+  /* Fonts */
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body:    "Inter", system-ui, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+body {
+    font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
+}
+main {
+  transition: opacity 0.2s ease;
+}

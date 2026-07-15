@@ -1,0 +1,28 @@
+<?php
+$isDark = ($theme ?? 'light') === 'dark';
+
+?>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><?= $this->sections['title'] ?? '' ?></title>
+    <style>body { opacity: 0; }</style>
+   <link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <?= $this->sections['styles'] ?? '' ?>
+    <?= vite(['resources/css/app.css', 'resources/js/app.js']) ?>
+</head>
+<body class="<?= $isDark ? 'bg-zinc-950 text-zinc-100' : 'bg-zinc-50 text-zinc-900' ?>">
+
+ 
+        <main class="flex-1 p-6">
+            <?= $this->sections['content'] ?? '' ?>
+        </main>
+
+
+    <?= $this->sections['scripts'] ?? '' ?>
+</body>
+</html>

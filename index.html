@@ -1,0 +1,742 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TAMARAW — Fresh from the Farm, Straight to Your Table</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;0,9..144,900;1,9..144,500&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
+
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            display: ['Fraunces', 'serif'],
+            sans: ['Manrope', 'sans-serif'],
+            mono: ['"JetBrains Mono"', 'monospace'],
+          },
+          colors: {
+            /* brand green scale anchored on the three requested shades:
+               600 = #16A34A (main), 500 = #22C55E (bright / CTA), 900 = #14532D (dark / header-footer) */
+            brand: {
+              50:  '#F0FDF4',
+              100: '#DCFCE7',
+              200: '#BBF7D0',
+              300: '#86EFAC',
+              400: '#4ADE80',
+              500: '#22C55E',
+              600: '#16A34A',
+              700: '#15803D',
+              800: '#166534',
+              900: '#14532D',
+            },
+          },
+          boxShadow: {
+            'card': '0 2px 10px -2px rgba(20,83,45,0.10)',
+            'lift': '0 18px 40px -12px rgba(20,83,45,0.28)',
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    ::-webkit-scrollbar { width: 8px; }
+    ::-webkit-scrollbar-track { background: #F0FDF4; }
+    ::-webkit-scrollbar-thumb { background: #16A34A; border-radius: 4px; }
+    ::-webkit-scrollbar-thumb:hover { background: #14532D; }
+    .hide-scrollbar::-webkit-scrollbar { display: none; }
+    body { font-feature-settings: "ss01"; }
+
+    /* Consistent keyboard focus ring across the whole page */
+    :focus-visible { outline: 2px solid #16A34A; outline-offset: 2px; border-radius: 2px; }
+
+    /* ---------- HERO FIELD ---------- */
+    .field-sky {
+      background:
+        radial-gradient(120% 90% at 15% 0%, #F0FDF4 0%, #DCFCE7 42%, transparent 70%),
+        linear-gradient(180deg, #FFFFFF 0%, #F0FDF4 55%, #DCFCE7 100%);
+    }
+    .furrow-band {
+      position: relative;
+      height: 168px;
+      background: repeating-linear-gradient(
+        180deg,
+        #166534 0px, #166534 6px,
+        #14532D 6px, #14532D 12px,
+        #113D22 12px, #113D22 18px
+      );
+      border-top: 3px solid #0F3319;
+    }
+    .furrow-band::before {
+      content: "";
+      position: absolute; inset: 0;
+      background-image: repeating-linear-gradient(90deg, rgba(255,255,255,0.06) 0px, rgba(255,255,255,0.06) 2px, transparent 2px, transparent 46px);
+    }
+
+    .tractor-track {
+      position: absolute;
+      top: -46px;
+      left: 0;
+      width: 100%;
+      animation: drive 13s linear infinite;
+      z-index: 20;
+    }
+    @keyframes drive {
+      0%   { transform: translateX(-18%); }
+      100% { transform: translateX(112%); }
+    }
+    .puff {
+      animation: puff 1.1s ease-out infinite;
+      transform-origin: center;
+    }
+    .puff:nth-child(2) { animation-delay: .35s; }
+    .puff:nth-child(3) { animation-delay: .7s; }
+    @keyframes puff {
+      0%   { opacity: .55; transform: translate(0,0) scale(0.5); }
+      100% { opacity: 0;   transform: translate(-14px,-22px) scale(1.5); }
+    }
+
+    .seed-word {
+      position: absolute;
+      bottom: 8px;
+      opacity: 0;
+      white-space: nowrap;
+      transform: translateY(10px) scale(0.9);
+      z-index: 30;
+    }
+    .seed-word .stem { display:block; width:2px; height:0; background:#F0FDF4; margin:0 auto; }
+
+    @keyframes sprout1 { 0%,10%{opacity:0;transform:translateY(10px) scale(.9);} 15%,32%{opacity:1;transform:translateY(0) scale(1);} 40%,100%{opacity:0;transform:translateY(-6px) scale(.95);} }
+    @keyframes sprout2 { 0%,26%{opacity:0;transform:translateY(10px) scale(.9);} 31%,48%{opacity:1;transform:translateY(0) scale(1);} 56%,100%{opacity:0;transform:translateY(-6px) scale(.95);} }
+    @keyframes sprout3 { 0%,42%{opacity:0;transform:translateY(10px) scale(.9);} 47%,64%{opacity:1;transform:translateY(0) scale(1);} 72%,100%{opacity:0;transform:translateY(-6px) scale(.95);} }
+    @keyframes sprout4 { 0%,58%{opacity:0;transform:translateY(10px) scale(.9);} 63%,80%{opacity:1;transform:translateY(0) scale(1);} 88%,100%{opacity:0;transform:translateY(-6px) scale(.95);} }
+    @keyframes sprout5 { 0%,74%{opacity:0;transform:translateY(10px) scale(.9);} 79%,96%{opacity:1;transform:translateY(0) scale(1);} 100%{opacity:0;transform:translateY(-6px) scale(.95);} }
+
+    .seed-word.w1 { left: 3%;  animation: sprout1 13s linear infinite; }
+    .seed-word.w2 { left: 22%; animation: sprout2 13s linear infinite; }
+    .seed-word.w3 { left: 43%; animation: sprout3 13s linear infinite; }
+    .seed-word.w4 { left: 64%; animation: sprout4 13s linear infinite; }
+    .seed-word.w5 { left: 83%; animation: sprout5 13s linear infinite; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .tractor-track, .puff, .seed-word { animation: none !important; }
+      .seed-word { opacity: 1; transform: none; position: static; display:inline-block; margin-right: 14px; }
+    }
+
+    .badge-eyebrow::before { content:"—"; margin-right:6px; color:#16A34A; }
+
+    /* mobile menu slide */
+    #mobile-menu { max-height: 0; overflow: hidden; transition: max-height .25s ease; }
+    #mobile-menu.open { max-height: 220px; }
+  </style>
+</head>
+
+<body class="bg-white text-gray-800 font-sans min-h-screen flex flex-col">
+
+<div id="toast-container" class="fixed bottom-6 right-6 z-[100] flex flex-col gap-3 pointer-events-none" aria-live="polite"></div>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="bg-brand-900 text-brand-50 text-xs font-semibold py-2 px-4 text-center tracking-wide">
+  <i class="fa-solid fa-truck-fast mr-2 text-brand-400" aria-hidden="true"></i> Free delivery across Baco, Oriental Mindoro on orders over ₱500!
+</div>
+
+<!-- HEADER -->
+<header class="bg-white/95 backdrop-blur sticky top-0 z-40 border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+    <div class="flex items-center justify-between gap-4 md:gap-6">
+
+      <a href="#" class="flex items-center space-x-3 flex-shrink-0">
+        <div class="bg-brand-700 text-white p-2 rounded-lg leading-none shadow-sm w-10 h-10 flex items-center justify-center">
+          <i class="fa-solid fa-tractor text-lg" aria-hidden="true"></i>
+        </div>
+        <div class="hidden sm:block">
+          <span class="block text-xl font-black text-brand-900 leading-none tracking-tight font-display">TAMARAW</span>
+          <span class="block text-[9px] font-bold text-gray-400 tracking-[0.2em] uppercase mt-1">Direct to Farmer</span>
+        </div>
+      </a>
+
+      <div class="flex-1 max-w-2xl hidden md:block relative">
+        <label for="search-bar-desktop" class="sr-only">Search products</label>
+        <input type="text" id="search-bar-desktop" class="search-input w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm transition-all"
+          placeholder="Search for fresh mangoes, rice, vegetables..." oninput="onSearchInput(this)">
+        <i class="fa-solid fa-magnifying-glass absolute left-5 top-3.5 text-gray-400" aria-hidden="true"></i>
+      </div>
+
+      <div class="flex items-center space-x-2 md:space-x-3 flex-shrink-0">
+        <button onclick="toggleSellModal()" class="hidden lg:flex items-center space-x-2 text-gray-600 hover:text-brand-700 font-bold text-sm transition px-3 py-2">
+          <i class="fa-solid fa-store" aria-hidden="true"></i><span>Seller Center</span>
+        </button>
+        <div class="h-6 w-px bg-gray-200 hidden lg:block"></div>
+        <button onclick="toggleCart()" aria-haspopup="dialog" class="relative p-2 text-gray-700 hover:bg-brand-50 hover:text-brand-700 rounded-full transition flex items-center gap-2" aria-label="Open cart">
+          <div class="relative">
+            <i class="fa-solid fa-cart-shopping text-xl" aria-hidden="true"></i>
+            <span id="cart-badge" class="absolute -top-1.5 -right-2 bg-brand-500 text-white text-[10px] font-bold rounded-full h-4 min-w-[16px] px-1 flex items-center justify-center scale-0 transition-transform duration-300 shadow-sm">0</span>
+          </div>
+          <span class="hidden sm:block text-sm font-bold ml-1 font-mono" id="cart-total-header">₱0.00</span>
+        </button>
+        <button onclick="toggleMobileMenu()" id="mobile-menu-btn" aria-expanded="false" aria-controls="mobile-menu" aria-label="Toggle menu" class="md:hidden p-2 text-gray-700 hover:bg-brand-50 hover:text-brand-700 rounded-full transition">
+          <i class="fa-solid fa-bars text-xl" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- MOBILE MENU (search + seller center, shown below md) -->
+    <div id="mobile-menu" class="md:hidden">
+      <div class="pt-4 pb-2 space-y-3">
+        <div class="relative">
+          <label for="search-bar-mobile" class="sr-only">Search products</label>
+          <input type="text" id="search-bar-mobile" class="search-input w-full pl-12 pr-4 py-3 rounded-full border border-gray-200 bg-gray-50 focus:bg-white focus:outline-none focus:border-brand-500 focus:ring-1 focus:ring-brand-500 text-sm"
+            placeholder="Search for fresh mangoes, rice, vegetables..." oninput="onSearchInput(this)">
+          <i class="fa-solid fa-magnifying-glass absolute left-5 top-3.5 text-gray-400" aria-hidden="true"></i>
+        </div>
+        <button onclick="toggleSellModal()" class="w-full flex items-center gap-2 text-gray-700 hover:text-brand-700 font-bold text-sm transition px-3 py-2 rounded-lg hover:bg-brand-50">
+          <i class="fa-solid fa-store" aria-hidden="true"></i><span>Seller Center</span>
+        </button>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="field-sky relative overflow-hidden">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 lg:pt-20 pb-0 relative z-10">
+    <div class="max-w-2xl">
+      <span class="inline-flex items-center gap-2 py-1.5 px-3 rounded-full bg-brand-700 text-brand-50 text-[11px] font-bold tracking-wider uppercase mb-5">
+        <i class="fa-solid fa-location-dot text-brand-300" aria-hidden="true"></i> Baco, Oriental Mindoro
+      </span>
+      <h1 class="font-display text-4xl lg:text-6xl font-black text-brand-900 leading-[1.05] mb-5">
+        Fresh from the farm,<br><span class="italic text-brand-600">straight to your table.</span>
+      </h1>
+      <p class="text-lg text-gray-600 mb-8 max-w-lg font-medium">
+        Buy directly from Baco's farmers — no middlemen, fair prices, and guaranteed freshness since harvest only happens after your order comes in.
+      </p>
+      <div class="flex flex-wrap gap-4 mb-14">
+        <a href="#storefront" class="bg-brand-500 text-white px-8 py-3.5 rounded-full font-bold shadow-lift hover:bg-brand-600 transition-all text-center flex items-center gap-2">
+          Shop Fresh Produce <i class="fa-solid fa-arrow-right text-sm" aria-hidden="true"></i>
+        </a>
+        <a href="#ai-companion" class="border-2 border-brand-900/15 text-brand-900 px-8 py-3.5 rounded-full font-bold hover:border-brand-600 hover:text-brand-700 transition-all text-center">
+          For Farmers
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- animated field with tractor + planted words -->
+  <div class="relative w-full furrow-band overflow-hidden">
+    <div class="seed-word w1"><span class="stem"></span><span class="bg-white border border-brand-500/40 text-brand-800 font-display italic font-semibold text-sm md:text-base px-4 py-1.5 rounded-full shadow-card inline-block">Fresh.</span></div>
+    <div class="seed-word w2"><span class="stem"></span><span class="bg-white border border-brand-500/40 text-brand-800 font-display italic font-semibold text-sm md:text-base px-4 py-1.5 rounded-full shadow-card inline-block">Direct from the farmer.</span></div>
+    <div class="seed-word w3"><span class="stem"></span><span class="bg-white border border-brand-500/40 text-brand-800 font-display italic font-semibold text-sm md:text-base px-4 py-1.5 rounded-full shadow-card inline-block">Fair prices.</span></div>
+    <div class="seed-word w4"><span class="stem"></span><span class="bg-white border border-brand-500/40 text-brand-800 font-display italic font-semibold text-sm md:text-base px-4 py-1.5 rounded-full shadow-card inline-block">Powered by AI.</span></div>
+    <div class="seed-word w5"><span class="stem"></span><span class="bg-white border border-brand-500/40 text-brand-800 font-display italic font-semibold text-sm md:text-base px-4 py-1.5 rounded-full shadow-card inline-block">From Baco. 🌾</span></div>
+
+    <!-- tractor -->
+    <div class="tractor-track">
+      <svg width="150" height="90" viewBox="0 0 150 90" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+        <ellipse class="puff" cx="118" cy="20" rx="6" ry="6" fill="#F0FDF4"/>
+        <ellipse class="puff" cx="118" cy="20" rx="6" ry="6" fill="#F0FDF4"/>
+        <ellipse class="puff" cx="118" cy="20" rx="6" ry="6" fill="#F0FDF4"/>
+        <rect x="108" y="10" width="7" height="20" rx="2" fill="#14532D"/>
+        <path d="M20 58 h60 v-16 a6 6 0 0 1 6-6 h10 l14 22 h6 v10 H20 Z" fill="#16A34A"/>
+        <rect x="34" y="26" width="34" height="20" rx="3" fill="#F0FDF4" stroke="#14532D" stroke-width="2"/>
+        <rect x="86" y="34" width="24" height="10" rx="2" fill="#15803D"/>
+        <circle cx="42" cy="70" r="17" fill="#14532D"/>
+        <circle cx="42" cy="70" r="7" fill="#22C55E"/>
+        <circle cx="104" cy="70" r="11" fill="#14532D"/>
+        <circle cx="104" cy="70" r="4.5" fill="#22C55E"/>
+        <rect x="16" y="62" width="10" height="8" rx="1" fill="#14532D"/>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- WHY TAMARAW -->
+<section class="bg-white py-16 border-b border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="max-w-2xl mb-12">
+      <span class="badge-eyebrow font-display text-sm font-bold uppercase tracking-wider text-brand-600">Why TAMARAW</span>
+      <h2 class="font-display text-3xl lg:text-4xl font-black text-gray-900 mt-2 mb-4">Produce can pass through 5 hands before it reaches you. We cut it down to one.</h2>
+      <p class="text-gray-600 text-base leading-relaxed">Every trader, wholesaler, and reseller in between takes a cut and adds a day. By the time it reaches a table, the farmer has earned little and the produce is no longer fresh. TAMARAW connects you straight to the farm, so more of what you pay goes to the person who grew it — and what you get is harvested, not stored.</p>
+    </div>
+
+    <!-- Before / After comparison -->
+    <div class="grid md:grid-cols-2 gap-6 mb-12">
+      <div class="bg-gray-50 border border-gray-200 rounded-2xl p-6">
+        <h3 class="font-bold text-gray-500 text-sm uppercase tracking-wide mb-4"><i class="fa-solid fa-xmark text-gray-400 mr-1" aria-hidden="true"></i> The old way</h3>
+        <div class="flex items-center flex-wrap gap-2 text-xs font-bold text-gray-500 mb-5">
+          <span class="bg-white border border-gray-200 rounded-full px-3 py-1.5">Farmer</span>
+          <i class="fa-solid fa-arrow-right text-gray-300" aria-hidden="true"></i>
+          <span class="bg-white border border-gray-200 rounded-full px-3 py-1.5">Trader</span>
+          <i class="fa-solid fa-arrow-right text-gray-300" aria-hidden="true"></i>
+          <span class="bg-white border border-gray-200 rounded-full px-3 py-1.5">Wholesaler</span>
+          <i class="fa-solid fa-arrow-right text-gray-300" aria-hidden="true"></i>
+          <span class="bg-white border border-gray-200 rounded-full px-3 py-1.5">Retailer</span>
+          <i class="fa-solid fa-arrow-right text-gray-300" aria-hidden="true"></i>
+          <span class="bg-white border border-gray-200 rounded-full px-3 py-1.5">You</span>
+        </div>
+        <ul class="space-y-2 text-sm text-gray-600 font-medium">
+          <li class="flex items-start gap-2"><i class="fa-solid fa-minus text-gray-400 mt-1 text-xs" aria-hidden="true"></i> Farmer earns as little as 30% of the final price</li>
+          <li class="flex items-start gap-2"><i class="fa-solid fa-minus text-gray-400 mt-1 text-xs" aria-hidden="true"></i> Produce can sit 3–5 days before it reaches you</li>
+          <li class="flex items-start gap-2"><i class="fa-solid fa-minus text-gray-400 mt-1 text-xs" aria-hidden="true"></i> No way to know which farm it came from</li>
+        </ul>
+      </div>
+
+      <div class="bg-brand-900 rounded-2xl p-6 shadow-lift">
+        <h3 class="font-bold text-brand-300 text-sm uppercase tracking-wide mb-4"><i class="fa-solid fa-check text-brand-400 mr-1" aria-hidden="true"></i> The TAMARAW way</h3>
+        <div class="flex items-center flex-wrap gap-2 text-xs font-bold text-white mb-5">
+          <span class="bg-brand-700 rounded-full px-3 py-1.5">Farmer</span>
+          <i class="fa-solid fa-arrow-right text-brand-400" aria-hidden="true"></i>
+          <span class="bg-brand-700 rounded-full px-3 py-1.5">You</span>
+        </div>
+        <ul class="space-y-2 text-sm text-brand-50 font-medium">
+          <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-1 text-xs" aria-hidden="true"></i> Farmer keeps up to 80% of what you pay</li>
+          <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-1 text-xs" aria-hidden="true"></i> Harvested only after you place your order</li>
+          <li class="flex items-start gap-2"><i class="fa-solid fa-check text-brand-400 mt-1 text-xs" aria-hidden="true"></i> Every listing shows the farm it came from</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Stat strip -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <p class="font-display text-3xl md:text-4xl font-black text-brand-700">500+</p>
+        <p class="text-xs text-gray-500 font-semibold mt-1">Partner farmers in Baco</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl md:text-4xl font-black text-brand-700">0</p>
+        <p class="text-xs text-gray-500 font-semibold mt-1">Middlemen between farm and you</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl md:text-4xl font-black text-brand-700">80%</p>
+        <p class="text-xs text-gray-500 font-semibold mt-1">Of your payment goes to the farmer</p>
+      </div>
+      <div>
+        <p class="font-display text-3xl md:text-4xl font-black text-brand-700">24 hrs</p>
+        <p class="text-xs text-gray-500 font-semibold mt-1">From harvest to your doorstep</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BADGES -->
+<section class="border-b border-gray-100 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-9">
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div class="flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-handshake text-2xl text-brand-600" aria-hidden="true"></i>
+        <h4 class="font-bold text-sm text-gray-900">100% Fair Trade</h4>
+        <p class="text-xs text-gray-500">Farmers keep the profit</p>
+      </div>
+      <div class="flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-leaf text-2xl text-brand-600" aria-hidden="true"></i>
+        <h4 class="font-bold text-sm text-gray-900">Harvest to Order</h4>
+        <p class="text-xs text-gray-500">Harvested after you order</p>
+      </div>
+      <div class="flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-shield-halved text-2xl text-brand-600" aria-hidden="true"></i>
+        <h4 class="font-bold text-sm text-gray-900">Secure Escrow</h4>
+        <p class="text-xs text-gray-500">Safe online payments</p>
+      </div>
+      <div class="flex flex-col items-center justify-center space-y-2">
+        <i class="fa-solid fa-robot text-2xl text-brand-600" aria-hidden="true"></i>
+        <h4 class="font-bold text-sm text-gray-900">AI Empowered</h4>
+        <p class="text-xs text-gray-500">Smart farming tools</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUICK CATEGORIES -->
+<section class="py-12 bg-white">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <h3 class="badge-eyebrow font-display text-xl font-bold text-gray-900 mb-6">Shop by Category</h3>
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-4" id="category-tabs">
+      <button data-category="Fruits" onclick="filterCategory('Fruits')" class="category-btn bg-white p-6 rounded-2xl shadow-card border border-gray-100 hover:border-brand-500 hover:shadow-lift transition text-center group">
+        <div class="w-16 h-16 mx-auto bg-brand-50 rounded-full flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform" aria-hidden="true">🥭</div>
+        <h4 class="font-bold text-gray-800">Fresh Fruits</h4>
+      </button>
+      <button data-category="Vegetables" onclick="filterCategory('Vegetables')" class="category-btn bg-white p-6 rounded-2xl shadow-card border border-gray-100 hover:border-brand-500 hover:shadow-lift transition text-center group">
+        <div class="w-16 h-16 mx-auto bg-brand-100 rounded-full flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform" aria-hidden="true">🥦</div>
+        <h4 class="font-bold text-gray-800">Vegetables</h4>
+      </button>
+      <button data-category="Grains" onclick="filterCategory('Grains')" class="category-btn bg-white p-6 rounded-2xl shadow-card border border-gray-100 hover:border-brand-500 hover:shadow-lift transition text-center group">
+        <div class="w-16 h-16 mx-auto bg-brand-100 rounded-full flex items-center justify-center text-3xl mb-3 group-hover:scale-110 transition-transform" aria-hidden="true">🌾</div>
+        <h4 class="font-bold text-gray-800">Grains &amp; Rice</h4>
+      </button>
+      <button data-category="All" onclick="filterCategory('All')" class="category-btn active bg-white p-6 rounded-2xl shadow-card border-brand-500 ring-1 ring-brand-500 text-center group">
+        <div class="w-16 h-16 mx-auto bg-gray-50 rounded-full flex items-center justify-center text-2xl text-gray-400 mb-3 group-hover:scale-110 transition-transform"><i class="fa-solid fa-border-all" aria-hidden="true"></i></div>
+        <h4 class="font-bold text-brand-700">View All</h4>
+      </button>
+    </div>
+  </div>
+</section>
+
+<!-- STOREFRONT MAIN -->
+<main id="storefront" class="bg-white py-14 scroll-mt-20 border-t border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex justify-between items-end mb-8">
+      <div>
+        <h2 class="font-display text-3xl font-black text-gray-900 mb-1">Live Marketplace</h2>
+        <p class="text-sm text-gray-500">Fresh from the harvest of our registered partner farmers.</p>
+      </div>
+    </div>
+
+    <div id="product-grid" class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 gap-6">
+      <!-- Products injected via JS -->
+    </div>
+  </div>
+</main>
+
+<!-- AI PROMO SECTION -->
+<section id="ai-companion" class="py-16 bg-gradient-to-br from-brand-50 to-white border-t border-gray-100">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row items-center gap-12">
+    <div class="flex-1">
+      <div class="inline-flex items-center gap-2 bg-brand-100 text-brand-700 px-3 py-1 rounded-full text-xs font-bold mb-4">
+        <i class="fa-solid fa-sparkles" aria-hidden="true"></i> Included for Sellers
+      </div>
+      <h2 class="font-display text-3xl font-black text-gray-900 mb-4">Tamaraw AI Farming Companion</h2>
+      <p class="text-gray-600 mb-6 leading-relaxed">
+        Our AI helps Baco's farmers get more out of every harvest — from instant pest detection and soil analysis to weather-based crop planning. Think of it as a 24/7 agronomist in your pocket.
+      </p>
+      <ul class="space-y-3 text-sm text-gray-700 font-semibold mb-8">
+        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-600" aria-hidden="true"></i> Real-time disease diagnosis</li>
+        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-600" aria-hidden="true"></i> Market demand pricing tips</li>
+        <li class="flex items-center gap-3"><i class="fa-solid fa-check text-brand-600" aria-hidden="true"></i> Localized for Mindoro's climate</li>
+      </ul>
+      <button onclick="toggleSellModal()" class="bg-brand-700 text-white px-6 py-3 rounded-full font-bold shadow-lift hover:bg-brand-800 transition">Try the AI Assistant</button>
+    </div>
+    <div class="flex-1 relative w-full flex justify-center">
+      <div class="bg-white p-6 rounded-3xl shadow-lift border border-gray-100 w-full max-w-sm relative z-10">
+        <div class="flex items-center gap-3 border-b border-gray-100 pb-4 mb-4">
+          <div class="w-10 h-10 bg-brand-700 rounded-full flex items-center justify-center text-white"><i class="fa-solid fa-robot" aria-hidden="true"></i></div>
+          <div>
+            <h4 class="font-bold text-gray-900 text-sm">Tamaraw AI</h4>
+            <p class="text-[10px] text-brand-600 font-bold flex items-center gap-1"><span class="w-2 h-2 bg-brand-500 rounded-full animate-pulse"></span> Online</p>
+          </div>
+        </div>
+        <div class="space-y-4 mb-4">
+          <div class="bg-gray-100 p-3 rounded-2xl rounded-tr-sm text-xs text-gray-700 w-4/5 ml-auto">What's affecting my mango leaves? They have black spots.</div>
+          <div class="bg-brand-50 p-3 rounded-2xl rounded-tl-sm text-xs text-brand-900 w-5/6 border border-brand-100">
+            Based on common pests in Baco, this looks like a <strong>Mango Leafhopper</strong>. Spray Imidacloprid before full flowering.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PRE-FOOTER BANNER -->
+<section class="relative bg-brand-900 py-28 overflow-hidden flex items-center justify-center">
+  <div class="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1464226184884-fa280b87c399?auto=format&fit=crop&q=80&w=1920')] bg-cover bg-center mix-blend-overlay opacity-25"></div>
+  <h2 class="relative z-10 font-display text-3xl md:text-5xl font-black text-white tracking-wide italic text-center px-6">
+    "Direct from Baco, Straight to Your Table"
+  </h2>
+</section>
+
+<!-- RICH FOOTER -->
+<footer class="bg-brand-900 text-brand-100 py-14 font-sans text-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-6 gap-10">
+
+      <div class="lg:col-span-2">
+        <div class="flex items-center gap-2 mb-4">
+          <i class="fa-solid fa-tractor text-brand-400 text-2xl" aria-hidden="true"></i>
+          <span class="text-white font-display font-bold text-2xl tracking-tight">TAMARAW.com</span>
+        </div>
+        <p class="text-white font-medium mb-8 italic font-display">"Direct from Baco, Straight to Your Table"</p>
+
+        <div class="flex space-x-5 text-brand-300 text-lg">
+          <a href="#" class="hover:text-brand-400 transition" aria-label="Facebook"><i class="fa-brands fa-facebook" aria-hidden="true"></i></a>
+          <a href="#" class="hover:text-brand-400 transition" aria-label="Twitter"><i class="fa-brands fa-twitter" aria-hidden="true"></i></a>
+          <a href="#" class="hover:text-brand-400 transition" aria-label="YouTube"><i class="fa-brands fa-youtube" aria-hidden="true"></i></a>
+          <a href="#" class="hover:text-brand-400 transition" aria-label="Instagram"><i class="fa-brands fa-instagram" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div>
+        <h4 class="text-brand-300 font-bold mb-5">TAMARAW</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="hover:text-white transition">About TAMARAW</a></li>
+          <li><a href="#" class="hover:text-white transition">Career</a></li>
+          <li><a href="#" class="hover:text-white transition">Agri Blog</a></li>
+          <li><a href="#" class="hover:text-white transition">B2B Digital Wholesale</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-brand-300 font-bold mb-5">Buy</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="hover:text-white transition">Fresh Produce Index</a></li>
+          <li><a href="#" class="hover:text-white transition">TAMARAW COD</a></li>
+          <li><a href="#" class="hover:text-white transition">Delivery Tracker</a></li>
+          <li><a href="#" class="hover:text-white transition">Promo &amp; Vouchers</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-brand-300 font-bold mb-5">Sell</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="hover:text-white transition">Farmer Education Center</a></li>
+          <li><a href="#" class="hover:text-white transition">Crop &amp; Yield Index</a></li>
+          <li><a href="#" class="hover:text-white transition">Register Official Farm</a></li>
+          <li><a href="#" class="hover:text-white transition">AI Farming Guide</a></li>
+        </ul>
+      </div>
+
+      <div>
+        <h4 class="text-brand-300 font-bold mb-5">Guide and Help</h4>
+        <ul class="space-y-3">
+          <li><a href="#" class="hover:text-white transition">TAMARAW Care</a></li>
+          <li><a href="#" class="hover:text-white transition">Terms and Conditions</a></li>
+          <li><a href="#" class="hover:text-white transition">Privacy Policy</a></li>
+          <li><a href="#" class="hover:text-white transition">Partners</a></li>
+        </ul>
+      </div>
+
+    </div>
+
+    <div class="mt-16 pt-8 border-t border-brand-800 text-center text-xs text-brand-300">
+      © 2024 – 2026, TAMARAW.com
+    </div>
+  </div>
+</footer>
+
+<!-- CART DRAWER -->
+<div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden hidden" role="dialog" aria-modal="true" aria-label="Shopping cart">
+  <div onclick="toggleCart()" class="absolute inset-0 bg-brand-900/60 backdrop-blur-sm"></div>
+  <div class="absolute inset-y-0 right-0 max-w-md w-full bg-white shadow-2xl flex flex-col">
+    <div class="px-6 py-5 border-b border-gray-100 flex justify-between items-center bg-white">
+      <h2 class="font-display font-bold text-lg"><i class="fa-solid fa-cart-shopping mr-2 text-brand-600" aria-hidden="true"></i> Your Cart</h2>
+      <button onclick="toggleCart()" class="text-gray-500 hover:text-gray-900" aria-label="Close cart"><i class="fa-solid fa-xmark" aria-hidden="true"></i></button>
+    </div>
+    <div id="cart-items-container" class="flex-1 overflow-y-auto p-4 bg-gray-50"></div>
+    <div class="p-6 bg-white border-t border-gray-100">
+      <div class="flex justify-between font-bold text-lg mb-4"><span>Total:</span><span id="cart-total" class="text-brand-700 font-mono">₱0.00</span></div>
+      <button onclick="openCheckout()" class="w-full bg-brand-600 text-white py-3 rounded-full font-bold hover:bg-brand-700 transition">Checkout</button>
+    </div>
+  </div>
+</div>
+
+<script>
+  const STORAGE_KEY = 'tamaraw_cart_v1';
+
+  let storeProducts = [
+    { id:1, name:'Carabao Mango (Premium)', category:'Fruits', price:120, unit:'kg', farmer:'Sto. Niño Coop', location:'Baco', image:'https://images.unsplash.com/photo-1553279768-865429fa0078?auto=format&fit=crop&q=80&w=400', stock:80, rating:5.0, sold:512 },
+    { id:2, name:'Dinorado Rice (NE42)', category:'Grains', price:55, unit:'kg', farmer:'San Teodoro Growers', location:'Baco', image:'https://images.unsplash.com/photo-1586201375761-83865001e31c?auto=format&fit=crop&q=80&w=400', stock:500, rating:4.8, sold:1240 },
+    { id:3, name:'Fresh Pechay (Bok Choy)', category:'Vegetables', price:40, unit:'kg', farmer:'Mangangan Farm', location:'Baco', image:'https://images.unsplash.com/photo-1582284540020-8acbe03f4924?auto=format&fit=crop&q=80&w=400', stock:30, rating:4.5, sold:95 },
+    { id:4, name:'Calamansi (Native Lime)', category:'Fruits', price:60, unit:'kg', farmer:'Bayanan Growers', location:'Baco', image:'https://images.unsplash.com/photo-1591073113125-e46713c829ed?auto=format&fit=crop&q=80&w=400', stock:120, rating:4.7, sold:340 },
+    { id:5, name:'Kalabasa (Squash)', category:'Vegetables', price:35, unit:'kg', farmer:'Mangangan Farm', location:'Baco', image:'https://images.unsplash.com/photo-1570586437263-ab629fccc818?auto=format&fit=crop&q=80&w=400', stock:60, rating:4.6, sold:210 },
+    { id:6, name:'Sitaw (String Beans)', category:'Vegetables', price:45, unit:'kg', farmer:'San Teodoro Growers', location:'Baco', image:'https://images.unsplash.com/photo-1642003942401-2ee14a1c363b?auto=format&fit=crop&q=80&w=400', stock:70, rating:4.4, sold:150 },
+    { id:7, name:'Malagkit (Glutinous Rice)', category:'Grains', price:65, unit:'kg', farmer:'Sto. Niño Coop', location:'Baco', image:'https://images.unsplash.com/photo-1596097635121-14b63b7a0c9a?auto=format&fit=crop&q=80&w=400', stock:200, rating:4.9, sold:410 }
+  ];
+
+  let cart = [];
+  let currentCategory = 'All';
+  let searchQuery = '';
+
+  /* ---------- persistence ---------- */
+  function saveCart() {
+    try {
+      const slim = cart.map(i => ({ id: i.product.id, qty: i.qty }));
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify(slim));
+    } catch (e) { /* storage unavailable — cart just won't persist */ }
+  }
+
+  function loadCart() {
+    try {
+      const raw = window.localStorage.getItem(STORAGE_KEY);
+      if (!raw) return;
+      const slim = JSON.parse(raw);
+      cart = slim
+        .map(item => {
+          const product = storeProducts.find(p => p.id === item.id);
+          return product ? { product, qty: item.qty } : null;
+        })
+        .filter(Boolean);
+    } catch (e) { cart = []; }
+  }
+
+  /* ---------- storefront ---------- */
+  function renderStorefront() {
+    const grid = document.getElementById('product-grid');
+    const q = searchQuery.trim().toLowerCase();
+
+    const filtered = storeProducts.filter(p =>
+      (currentCategory === 'All' || p.category === currentCategory) &&
+      (p.name.toLowerCase().includes(q) || p.farmer.toLowerCase().includes(q))
+    );
+
+    if (!filtered.length) {
+      grid.innerHTML = `
+        <div class="col-span-full flex flex-col items-center justify-center py-16 text-center">
+          <i class="fa-solid fa-seedling text-4xl text-gray-300 mb-4" aria-hidden="true"></i>
+          <p class="font-bold text-gray-700">No produce matches that search</p>
+          <p class="text-sm text-gray-500 mt-1">Try a different name, or browse another category.</p>
+        </div>`;
+      return;
+    }
+
+    grid.innerHTML = filtered.map(p => `
+        <div class="product-card bg-white rounded-2xl border border-gray-100 hover:border-brand-300 hover:shadow-lift transition-all overflow-hidden relative group flex flex-col">
+          <div class="relative pt-[100%] bg-gray-50 overflow-hidden">
+            <img src="${p.image}" alt="${p.name} from ${p.farmer}" loading="lazy" decoding="async" class="absolute inset-0 w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+            <button onclick="addToCart(${p.id})" aria-label="Add ${p.name} to cart"
+              class="absolute top-2 right-2 w-9 h-9 rounded-full bg-white shadow-lift text-brand-700 flex items-center justify-center hover:bg-brand-600 hover:text-white transition">
+              <i class="fa-solid fa-plus text-sm" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="p-4 flex-1 flex flex-col justify-between">
+            <div>
+              <div class="text-[10px] text-brand-600 font-bold uppercase tracking-wider mb-1">${p.farmer}</div>
+              <h4 class="font-bold text-gray-900 leading-tight mb-2">${p.name}</h4>
+            </div>
+            <div class="flex items-center justify-between mt-2">
+              <p class="text-lg font-black text-brand-700 font-mono">₱${p.price}<span class="text-xs font-normal text-gray-500 font-sans">/${p.unit}</span></p>
+              <div class="text-amber-400 text-xs"><i class="fa-solid fa-star" aria-hidden="true"></i> ${p.rating}</div>
+            </div>
+          </div>
+        </div>`).join('');
+  }
+
+  function onSearchInput(el) {
+    searchQuery = el.value;
+    document.querySelectorAll('.search-input').forEach(i => { if (i !== el) i.value = el.value; });
+    renderStorefront();
+  }
+
+  function filterCategory(cat) {
+    currentCategory = cat;
+    document.querySelectorAll('.category-btn').forEach(btn => {
+      const active = btn.dataset.category === cat;
+      btn.classList.toggle('border-brand-500', active);
+      btn.classList.toggle('ring-1', active);
+      btn.classList.toggle('ring-brand-500', active);
+      btn.classList.toggle('border-gray-100', !active);
+    });
+    renderStorefront();
+  }
+
+  /* ---------- cart ---------- */
+  function toggleCart() {
+    document.getElementById('cart-drawer').classList.toggle('hidden');
+    renderCart();
+  }
+
+  function addToCart(id) {
+    const p = storeProducts.find(i => i.id === id);
+    const item = cart.find(i => i.product.id === id);
+    if (item) item.qty++; else cart.push({ product: p, qty: 1 });
+    showToast(`Added ${p.name} to cart`);
+    saveCart();
+    updateBadge();
+  }
+
+  function changeQty(id, delta) {
+    const item = cart.find(i => i.product.id === id);
+    if (!item) return;
+    item.qty += delta;
+    if (item.qty <= 0) cart = cart.filter(i => i.product.id !== id);
+    saveCart();
+    updateBadge();
+    renderCart();
+  }
+
+  function removeFromCart(id) {
+    cart = cart.filter(i => i.product.id !== id);
+    saveCart();
+    updateBadge();
+    renderCart();
+  }
+
+  function updateBadge() {
+    const total = cart.reduce((a, i) => a + i.qty, 0);
+    const badge = document.getElementById('cart-badge');
+    badge.innerText = total;
+    badge.classList.toggle('scale-0', total === 0);
+    badge.classList.toggle('scale-100', total > 0);
+
+    const sub = cart.reduce((a, i) => a + (i.product.price * i.qty), 0);
+    document.getElementById('cart-total-header').innerText = `₱${sub.toFixed(2)}`;
+  }
+
+  function renderCart() {
+    const c = document.getElementById('cart-items-container');
+    let sub = 0;
+
+    if (!cart.length) {
+      c.innerHTML = '<p class="text-center py-10 text-gray-500">Your cart is empty.</p>';
+    } else {
+      c.innerHTML = cart.map(item => {
+        sub += item.product.price * item.qty;
+        return `
+        <div class="flex items-center gap-3 bg-white p-3 rounded-xl mb-2 shadow-card border border-gray-100">
+          <img src="${item.product.image}" alt="" class="w-16 h-16 rounded-lg object-cover">
+          <div class="flex-1 min-w-0">
+            <h4 class="text-sm font-bold truncate text-gray-900">${item.product.name}</h4>
+            <p class="text-brand-700 font-bold font-mono text-sm">₱${item.product.price}<span class="text-gray-400 font-sans font-normal">/${item.product.unit}</span></p>
+            <div class="flex items-center gap-2 mt-1.5">
+              <button onclick="changeQty(${item.product.id}, -1)" aria-label="Decrease quantity" class="w-6 h-6 rounded-full border border-gray-200 text-gray-600 hover:bg-gray-100 flex items-center justify-center text-xs">−</button>
+              <span class="text-sm font-bold w-5 text-center">${item.qty}</span>
+              <button onclick="changeQty(${item.product.id}, 1)" aria-label="Increase quantity" class="w-6 h-6 rounded-full border border-gray-200 text-gray-600 hover:bg-gray-100 flex items-center justify-center text-xs">+</button>
+            </div>
+          </div>
+          <button onclick="removeFromCart(${item.product.id})" aria-label="Remove ${item.product.name} from cart" class="text-gray-300 hover:text-red-500 transition p-1">
+            <i class="fa-solid fa-trash-can text-sm" aria-hidden="true"></i>
+          </button>
+        </div>`;
+      }).join('');
+    }
+    document.getElementById('cart-total').innerText = `₱${sub.toFixed(2)}`;
+  }
+
+  /* ---------- mobile menu ---------- */
+  function toggleMobileMenu() {
+    const menu = document.getElementById('mobile-menu');
+    const btn = document.getElementById('mobile-menu-btn');
+    const open = menu.classList.toggle('open');
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+
+  function closeMobileMenu() {
+    document.getElementById('mobile-menu').classList.remove('open');
+    document.getElementById('mobile-menu-btn').setAttribute('aria-expanded', 'false');
+  }
+
+  /* ---------- misc ---------- */
+  function toggleSellModal() {
+    showToast('Seller Center — coming soon');
+  }
+
+  function openCheckout() {
+    if (!cart.length) { showToast('Your cart is empty'); return; }
+    showToast('Checkout — coming soon');
+  }
+
+  function showToast(msg) {
+    const c = document.getElementById('toast-container');
+    const t = document.createElement('div');
+    t.className = 'bg-brand-900 text-white px-4 py-3 rounded-lg shadow-xl text-sm font-bold flex items-center gap-2 transform transition-all duration-300 translate-y-10 opacity-0';
+    t.innerHTML = `<i class="fa-solid fa-check-circle text-brand-400" aria-hidden="true"></i> ${msg}`;
+    c.appendChild(t);
+    setTimeout(() => t.classList.remove('translate-y-10', 'opacity-0'), 10);
+    setTimeout(() => { t.classList.add('opacity-0'); setTimeout(() => t.remove(), 300); }, 3000);
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+      const cartDrawer = document.getElementById('cart-drawer');
+      if (!cartDrawer.classList.contains('hidden')) toggleCart();
+      closeMobileMenu();
+    }
+  });
+
+  window.onload = function () {
+    loadCart();
+    updateBadge();
+    renderStorefront();
+  };
+</script>
+</body>
+</html>
