@@ -28,12 +28,12 @@
     
    <nav class="hidden lg:flex items-center gap-7">
 <?php foreach ([
-    'Marketplace'  => '#marketplace',
-    'For Farmers'  => '#how-it-works',
-    'AI Assistant' => '#ai',
-    'Cooperatives' => '#testimonials',
-    'Pricing'      => '#pricing',
-] as $link => $anchor): ?>
+      'Marketplace'  => '#marketplace',
+      'For Farmers'  => '#how-it-works',
+      'AI Assistant' => '#ai',
+      'Cooperatives' => '#testimonials',
+      'Pricing'      => '#pricing',
+  ] as $link => $anchor): ?>
     <a href="<?= htmlspecialchars((string)($anchor), ENT_QUOTES, 'UTF-8') ?>" class="text-sm text-muted-fg hover:text-ink transition-colors"><?= htmlspecialchars((string)($link), ENT_QUOTES, 'UTF-8') ?></a>
   <?php endforeach; ?>
 </nav>
@@ -67,7 +67,7 @@
   
   <div id="mobile-nav" class="hidden lg:hidden bg-cream border-t border-ink/10 px-5 py-5 flex flex-col gap-4">
     <?php foreach (['Marketplace','For Farmers','AI Assistant','Cooperatives','Pricing'] as $link): ?>
-      <a href="#" class="text-sm text-ink"><?= htmlspecialchars((string)($link), ENT_QUOTES, 'UTF-8') ?></a>
+      <a href="<?= htmlspecialchars((string)($anchor), ENT_QUOTES, 'UTF-8') ?>" class="text-sm text-ink"><?= htmlspecialchars((string)($link), ENT_QUOTES, 'UTF-8') ?></a>
     <?php endforeach; ?>
   </div>
 </header>
@@ -252,7 +252,7 @@
   </div>
 
   <div class="mt-10 text-center">
-   <a href="<?= htmlspecialchars((string)(url('/products')), ENT_QUOTES, 'UTF-8') ?>" class="inline-flex items-center gap-2 text-sm text-ink border border-ink/25 px-8 py-3 hover:border-forest hover:text-forest transition-colors">
+   <a href="<?= htmlspecialchars((string)(route('products.products')), ENT_QUOTES, 'UTF-8') ?>" class="inline-flex items-center gap-2 text-sm text-ink border border-ink/25 px-8 py-3 hover:border-forest hover:text-forest transition-colors">
   View All Products
   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
 </a>
