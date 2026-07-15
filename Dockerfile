@@ -26,7 +26,12 @@ RUN apt-get update && \
     a2enmod rewrite && \
     apt-get clean && \
     rm -rf /var/lib/apt/lists/*
-
+RUN echo '<Directory /var/www/html/public>\n\
+    AllowOverride All\n\
+    Require all granted\n\
+</Directory>' > /etc/apache2/conf-available/override.conf \
+    && a2enconf override
+    
 ENV APACHE_DOCUMENT_ROOT=/var/www/html/public
 RUN sed -ri -e 's!/var/www/html!${APACHE_DOCUMENT_ROOT}!g' \
         /etc/apache2/sites-available/*.conf && \
