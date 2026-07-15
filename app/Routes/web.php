@@ -47,6 +47,3 @@ Route::get('/', [HomeController::class, 'index']);
 Route::get('/products', [HomeController::class, 'products']);
 Route::get('/cart', [HomeController::class, 'cart']);
 Route::get('/checkout', [HomeController::class, 'checkout']);
-Route::get('/test', function(Request $req, Response $res) {
-    echo 'route works';
-});

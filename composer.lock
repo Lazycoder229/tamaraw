@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "litephp/core",
-            "version": "v1.1.4",
+            "version": "v1.1.5",
             "source": {
                 "type": "git",
                 "url": "https://github.com/Lazycoder229/litephp.git",
-                "reference": "b0d203670cd761d53625ed02f9632f333265b35c"
+                "reference": "85f38991b32aba4ee439f6faf0be862f2f3a8bc4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/Lazycoder229/litephp/zipball/b0d203670cd761d53625ed02f9632f333265b35c",
-                "reference": "b0d203670cd761d53625ed02f9632f333265b35c",
+                "url": "https://api.github.com/repos/Lazycoder229/litephp/zipball/85f38991b32aba4ee439f6faf0be862f2f3a8bc4",
+                "reference": "85f38991b32aba4ee439f6faf0be862f2f3a8bc4",
                 "shasum": ""
             },
             "require": {
@@ -42,9 +42,9 @@
             "description": "LitePHP - A lightweight PHP framework",
             "support": {
                 "issues": "https://github.com/Lazycoder229/litephp/issues",
-                "source": "https://github.com/Lazycoder229/litephp/tree/v1.1.4"
+                "source": "https://github.com/Lazycoder229/litephp/tree/v1.1.5"
             },
-            "time": "2026-07-15T08:38:25+00:00"
+            "time": "2026-07-15T08:46:21+00:00"
         }
     ],
     "packages-dev": [],
