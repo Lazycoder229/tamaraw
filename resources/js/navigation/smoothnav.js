@@ -7,8 +7,8 @@ export function initSmoothNav() {
     const url = link.href;
 
     const main = document.querySelector("main");
+    if (!main) return; // ← guard
 
-    // Close sidebar FIRST before swapping content
     const sidebar = document.getElementById("sidebar");
     const backdrop = document.getElementById("sidebar-backdrop");
     const isMobileSidebarOpen =
@@ -16,7 +16,7 @@ export function initSmoothNav() {
 
     if (window.innerWidth < 768 && isMobileSidebarOpen) {
       sidebar.classList.add("-translate-x-full");
-      backdrop.classList.add("hidden");
+      backdrop?.classList.add("hidden");
     }
 
     main.classList.add("opacity-0");
@@ -45,7 +45,6 @@ export function initSmoothNav() {
           window.history.pushState({}, doc.title, url);
           document.title = doc.title;
 
-          // ← DAGDAG: i-dispatch para malaman ng app.js na nag-swap na
           window.dispatchEvent(new CustomEvent('smoothnav:after'));
 
           if (typeof window.initPage === "function") {
@@ -64,6 +63,8 @@ export function initSmoothNav() {
 
   window.addEventListener("popstate", () => {
     const main = document.querySelector("main");
+    if (!main) return; // ← guard
+
     main.classList.add("opacity-0");
     fetch(location.href)
       .then((res) => {
@@ -80,7 +81,6 @@ export function initSmoothNav() {
         main.innerHTML = newMain.innerHTML;
         document.title = doc.title;
 
-        // ← DAGDAG din sa popstate
         window.dispatchEvent(new CustomEvent('smoothnav:after'));
 
         if (typeof window.initPage === "function") {
@@ -97,8 +97,12 @@ export function initSmoothNav() {
 
 export function bodyGlitch() {
   document.body.style.transition = "opacity 0.15s ease";
-  document.body.style.opacity = "0";
-  requestAnimationFrame(() => {
-    document.body.style.opacity = "1";
-  });
+
+  const show = () => { document.body.style.opacity = "1"; };
+
+  if (document.readyState === "loading") {
+    document.addEventListener("DOMContentLoaded", show);
+  } else {
+    requestAnimationFrame(show);
+  }
 }
