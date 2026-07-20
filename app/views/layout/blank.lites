@@ -17,6 +17,7 @@ $isDark = ($theme ?? 'light') === 'dark';
     @yield('styles')
     <?= vite(['resources/css/app.css', 'resources/js/app.js']) ?>
     <?= vite('resources/js/user_js/auth.js') ?>
+     <style>body { opacity: 0; }</style>
 </head>
 <body class="<?= $isDark ? 'bg-zinc-950 text-zinc-100' : 'bg-zinc-50 text-zinc-900' ?> min-h-screen overflow-x-hidden">
 

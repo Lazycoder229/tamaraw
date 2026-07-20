@@ -1,1 +1,0 @@
-(function(){var e=document.getElementById(`roleBuyer`),t=document.getElementById(`roleFarmer`),n=document.getElementById(`farmFields`),r=document.getElementById(`farm_name`);if(!e||!t||!n||!r)return;function i(){var e=t.checked;n.classList.toggle(`hidden`,!e),r.required=e}e.addEventListener(`change`,i),t.addEventListener(`change`,i),i()})();
