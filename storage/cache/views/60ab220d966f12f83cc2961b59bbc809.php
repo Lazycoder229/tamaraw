@@ -17,7 +17,15 @@ $isDark = ($theme ?? 'light') === 'dark';
     <?= $this->sections['styles'] ?? '' ?>
     <?= vite(['resources/css/app.css', 'resources/js/app.js']) ?>
     <?= vite('resources/js/user_js/auth.js') ?>
-     <style>body { opacity: 0; }</style>
+   <style>
+  body {
+    animation: fadeIn 0.3s ease forwards;
+  }
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+</style>
 </head>
 <body class="<?= $isDark ? 'bg-zinc-950 text-zinc-100' : 'bg-zinc-50 text-zinc-900' ?> min-h-screen overflow-x-hidden">
 

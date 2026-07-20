@@ -7,7 +7,7 @@ export function initSmoothNav() {
     const url = link.href;
 
     const main = document.querySelector("main");
-    if (!main) return; // ← guard
+    if (!main) return;
 
     const sidebar = document.getElementById("sidebar");
     const backdrop = document.getElementById("sidebar-backdrop");
@@ -19,7 +19,8 @@ export function initSmoothNav() {
       backdrop?.classList.add("hidden");
     }
 
-    main.classList.add("opacity-0");
+    main.style.opacity = '0.3';
+    main.style.transition = 'opacity 0.15s ease';
 
     const doFetch = () => {
       fetch(url)
@@ -51,7 +52,9 @@ export function initSmoothNav() {
             window.initPage();
           }
 
-          requestAnimationFrame(() => main.classList.remove("opacity-0"));
+          requestAnimationFrame(() => {
+            main.style.opacity = '1';
+          });
         })
         .catch(() => {
           window.location.href = url;
@@ -63,9 +66,11 @@ export function initSmoothNav() {
 
   window.addEventListener("popstate", () => {
     const main = document.querySelector("main");
-    if (!main) return; // ← guard
-
-    main.classList.add("opacity-0");
+    if (!main) return;
+/* 
+    main.style.opacity = '0.3';
+    main.style.transition = 'opacity 0.15s ease';
+ */
     fetch(location.href)
       .then((res) => {
         if (!res.ok) throw new Error(res.status);
@@ -87,7 +92,9 @@ export function initSmoothNav() {
           window.initPage();
         }
 
-        requestAnimationFrame(() => main.classList.remove("opacity-0"));
+        requestAnimationFrame(() => {
+          main.style.opacity = '1';
+        });
       })
       .catch(() => {
         window.location.href = location.href;

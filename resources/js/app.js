@@ -1,8 +1,8 @@
-import { initSmoothNav, bodyGlitch } from './navigation/smoothnav.js';
+import { initSmoothNav } from './navigation/smoothnav.js';
 import './hero.js';
 
 initSmoothNav();
-bodyGlitch();
+/* bodyGlitch(); */
 
 // ── Sidebar helpers ───────────────────────────────────────────────
 function openSidebar() {
