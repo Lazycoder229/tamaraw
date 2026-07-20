@@ -9,6 +9,7 @@ $isDark = ($theme ?? 'light') === 'dark';
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
     <meta name="theme-color" content="#166534">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <title>@yield('title')</title>
     <!--  <style>body { opacity: 0; }</style> -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -21,11 +22,11 @@ $isDark = ($theme ?? 'light') === 'dark';
     <?= vite(['resources/css/app.css', 'resources/js/app.js']) ?>
     <?= vite('resources/js/user_js/auth.js') ?>
 </head>
-<body class="<?= $isDark ? 'bg-zinc-950 text-zinc-100' : 'bg-zinc-50 text-zinc-900' ?>">
-      
-        <main class="flex-1">
-            @yield('content')
-        </main>
+<body class="<?= $isDark ? 'bg-zinc-950 text-zinc-100' : 'bg-zinc-50 text-zinc-900' ?> min-h-screen overflow-x-hidden">
+    
+    <main class="flex-1">
+        @yield('content')
+    </main>
 
     @yield('scripts')
 </body>
