@@ -2,6 +2,7 @@ import { defineConfig } from 'vite';
 import fs from 'fs';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
+import os from 'os';
 
 const hotFile = path.resolve('public/hot');
 
@@ -12,6 +13,20 @@ let cleanHandler = null;
 let sigintHandler = null;
 let sigtermHandler = null;
 
+function getLocalIP() {
+    const nets = os.networkInterfaces();
+    for (const name of Object.keys(nets)) {
+        for (const net of nets[name]) {
+            if (net.family === 'IPv4' && !net.internal) {
+                return net.address;
+            }
+        }
+    }
+    return 'localhost';
+}
+
+const localIP = getLocalIP();
+
 export default defineConfig({
     plugins: [
         tailwindcss(),
@@ -21,7 +36,7 @@ export default defineConfig({
 
             configureServer(server) {
                 server.httpServer?.once('listening', () => {
-                    fs.writeFileSync(hotFile, 'http://localhost:5173');
+                    fs.writeFileSync(hotFile, `http://${localIP}:5173`); // ← dynamic IP
                 });
 
                 const clean = () => {
@@ -86,35 +101,34 @@ export default defineConfig({
         rollupOptions: {
             input: [
                 'resources/css/app.css',
-                'resources/js/app.js'
+                'resources/js/app.js',
+                'resources/js/user_js/auth.js'
             ]
         }
     },
 
     server: {
-    host: 'localhost',
-    port: 5173,
-    hmr: {
-        host: 'localhost',
-        overlay: true
+        host: '0.0.0.0',
+        port: 5173,
+        hmr: {
+            host: localIP,  // ← dynamic IP, works sa phone at PC
+            port: 5173,
+            overlay: true
+        },
+        fs: {
+            allow: [
+                path.resolve('.')
+            ]
+        },
+        watch: {
+            ignored: [
+                '**/node_modules/**',
+                '**/storage/**',
+                '**/bootstrap/cache/**',
+                '**/public/build/**',
+                path.resolve('vite.config.js'),
+                path.resolve('vite.config.ts'),
+            ]
+        }
     },
-
-    // ← ito lang ang kailangan, wag nang proxy
-    fs: {
-        allow: [
-            path.resolve('.'),  // buong project root
-        ]
-    },
-
-    watch: {
-        ignored: [
-            '**/node_modules/**',
-            '**/storage/**',
-            '**/bootstrap/cache/**',
-            '**/public/build/**',
-            path.resolve('vite.config.js'),
-            path.resolve('vite.config.ts'),
-        ]
-    }
-},
 });

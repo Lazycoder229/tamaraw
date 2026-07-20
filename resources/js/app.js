@@ -1,7 +1,6 @@
 import { initSmoothNav, bodyGlitch } from './navigation/smoothnav.js';
-import './navigation/hero.js'
-import './navigation/product.js'
-import './cart-page.js'
+import './hero.js';
+
 initSmoothNav();
 bodyGlitch();
 
@@ -52,7 +51,16 @@ function syncActiveNav() {
         }
     });
 }
-
+/* 
 // I-run sa initial load at after every AJAX swap
 syncActiveNav();
 window.addEventListener('smoothnav:after', syncActiveNav);
+document.addEventListener("DOMContentLoaded", () => {
+    const btn = document.getElementById("menuBtn");
+    const menu = document.getElementById("mobileMenu");
+
+    btn.addEventListener("click", () => {
+        menu.classList.toggle("hidden");
+    });
+});
+ */

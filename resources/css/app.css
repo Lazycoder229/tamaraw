@@ -45,9 +45,23 @@
   --font-display: "Playfair Display", Georgia, serif;
   --font-body:    "Inter", system-ui, sans-serif;
 }
+:root{
+    --color-forest:    #1E5631;
+  --color-cream:     #F5F0E8;
+  --color-ink:       #1A1A1A;
+  --color-amber:     #F0B429;
+  --color-gold:      #F0B429;
+  --color-sienna:    #A0522D;
+  --color-muted:     #E8E3D8;
+  --color-card:      #F5F0E8;
+  --color-ai:        #3B82F6;
+  --color-ai-light:  #EFF6FF;
+  --color-muted-fg:  #6B7280;
 
+}
 html {
-  scroll-behavior: smooth;
+  scroll-padding-top: 70px; /* katumbas ng height ng sticky header mo + konting margin */
+  scroll-behavior: smooth;  /* bonus: smooth scroll imbes na biglaang jump */
 }
 body {
     font-family: "Poppins", ui-sans-serif, system-ui, sans-serif;
@@ -55,3 +69,88 @@ body {
 main {
   transition: opacity 0.2s ease;
 }
+
+@keyframes launch-click {
+  0%   { transform: translateY(0) rotate(-45deg); }
+  20%  { transform: translateY(-10px) rotate(-45deg); }
+  40%  { transform: translateY(-5px) rotate(-45deg); }
+  100% { transform: translateY(-10px) rotate(-45deg); }
+}
+
+@keyframes smoke-puff-left {
+  0%   { opacity: 0.8; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-14px, 14px) scale(3); }
+}
+
+@keyframes smoke-puff-right {
+  0%   { opacity: 0.8; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(14px, 14px) scale(3); }
+}
+
+@keyframes smoke-puff-down {
+  0%   { opacity: 0.8; transform: translate(0, 0) scale(1); }
+  100% { opacity: 0; transform: translate(-11px, 16px) scale(3); }
+}
+
+@keyframes pulse-ring {
+  0%   { box-shadow: 0 0 0 0 rgba(45,106,79,0.5); }
+  100% { box-shadow: 0 0 0 14px rgba(45,106,79,0); }
+}
+@keyframes rocket-bob {
+  0%   { transform: rotate(-45deg) translateY(0); }
+  50%  { transform: rotate(-45deg) translateY(-4px); }
+  100% { transform: rotate(-45deg) translateY(0); }
+}
+
+#backToTopBtn .rocket-icon {
+  display: inline-block;
+  animation: rocket-bob 1.5s ease-in-out infinite;
+}
+
+#backToTopBtn.launching .rocket-icon {
+  animation: launch-click 0.6s ease-in-out forwards;
+}
+#backToTopBtn .rocket-icon {
+  display: inline-block;
+  transform: rotate(-45deg);
+}
+
+#backToTopBtn.launching .rocket-icon {
+  animation: launch-click 0.6s ease-in-out forwards;
+}
+
+#backToTopBtn.launching {
+  animation: pulse-ring 0.6s ease-out;
+}
+
+#backToTopBtn .smoke {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 1);
+  pointer-events: none;
+}
+
+/* PALAGING nag-aanimation ang smoke */
+/* LEFT side smoke */
+#backToTopBtn .smoke:nth-child(1) { animation: smoke-puff-left  1.2s ease-out 0.0s  infinite; left: 2px;  bottom: 6px; width: 8px; height: 8px; }
+#backToTopBtn .smoke:nth-child(2) { animation: smoke-puff-left  1.2s ease-out 0.2s  infinite; left: 4px;  bottom: 4px; width: 5px; height: 5px; }
+#backToTopBtn .smoke:nth-child(3) { animation: smoke-puff-left  1.2s ease-out 0.4s  infinite; left: 6px;  bottom: 8px; width: 6px; height: 6px; }
+
+/* CENTER smoke */
+#backToTopBtn .smoke:nth-child(4) { animation: smoke-puff-down  1.2s ease-out 0.1s  infinite; left: 50%; bottom: 2px; width: 7px; height: 7px; transform: translateX(-50%); }
+
+/* RIGHT side smoke */
+#backToTopBtn .smoke:nth-child(5) { animation: smoke-puff-right 1.2s ease-out 0.0s  infinite; right: 2px; left: auto; bottom: 6px; width: 8px; height: 8px; }
+#backToTopBtn .smoke:nth-child(6) { animation: smoke-puff-right 1.2s ease-out 0.2s  infinite; right: 4px; left: auto; bottom: 4px; width: 5px; height: 5px; }
+#backToTopBtn .smoke:nth-child(7) { animation: smoke-puff-right 1.2s ease-out 0.4s  infinite; right: 6px; left: auto; bottom: 8px; width: 6px; height: 6px; }
+
+/* Extra burst kapag na-click */
+#backToTopBtn.launching .smoke:nth-child(1) { animation: smoke-puff-left  0.7s ease-out 0.0s  infinite; }
+#backToTopBtn.launching .smoke:nth-child(2) { animation: smoke-puff-left  0.7s ease-out 0.1s  infinite; }
+#backToTopBtn.launching .smoke:nth-child(3) { animation: smoke-puff-left  0.7s ease-out 0.2s  infinite; }
+#backToTopBtn.launching .smoke:nth-child(4) { animation: smoke-puff-down  0.7s ease-out 0.0s  infinite; }
+#backToTopBtn.launching .smoke:nth-child(5) { animation: smoke-puff-right 0.7s ease-out 0.0s  infinite; }
+#backToTopBtn.launching .smoke:nth-child(6) { animation: smoke-puff-right 0.7s ease-out 0.1s  infinite; }
+#backToTopBtn.launching .smoke:nth-child(7) { animation: smoke-puff-right 0.7s ease-out 0.2s  infinite; }

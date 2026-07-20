@@ -1,9 +1,9 @@
 {
     "private": true,
-    "scripts": {
-        "dev": "concurrently \"php -S localhost:3000 -t public\" \"vite\"",
-        "build": "vite build"
-    },
+   "scripts": {
+    "dev": "concurrently \"php -S 0.0.0.0:3000 -t public\" \"vite\"",
+    "build": "vite build"
+},
     "devDependencies": {
         "@tailwindcss/vite": "^4.3.0",
         "concurrently": "^10.0.3",

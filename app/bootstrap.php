@@ -13,6 +13,7 @@ ViewFactory::share([
         ['href' => '/',          'label' => 'Dashboard'],
         ['href' => '/products',  'label' => 'Marketplace'],  // ← add ito
     ],
+ 
     'headerLayout'  => 'centered-search',
     'headerActions' => [
         'notif'  => null,

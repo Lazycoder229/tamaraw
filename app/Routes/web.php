@@ -1,49 +1,23 @@
 <?php
-
-/**
- * Web Routes
- *
- * Define your application's HTTP routes here.
- * Routes are loaded by Bootstrap/app.php on every request.
- *
- * Available HTTP methods:
- *   Route::get($path, $action)
- *   Route::post($path, $action)
- *   Route::put($path, $action)
- *   Route::patch($path, $action)
- *   Route::delete($path, $action)
- *
- * Action formats:
- *   [ControllerClass::class, 'method']  — controller action
- *   function (Request $req, Response $res) { ... }  — closure
- *
- * Route groups with shared prefix and middleware:
- *   Route::group(['prefix' => '/admin', 'middleware' => ['auth']], function () {
- *       Route::get('/dashboard', [AdminController::class, 'dashboard']);
- *   });
- *
- * Named routes (for url generation):
- *   Route::get('/profile', [UserController::class, 'show'])->name('profile');
- *   // then use: route('profile')
- *
- * Route-level middleware:
- *   Route::post('/login', [AuthController::class, 'login'])->middleware('throttle');
- */
-
-use App\Controllers\HomeController;
+declare(strict_types=1);
 
 use Core\Facades\Route;
 use Core\Http\Request;
 use Core\Http\Response;
+use App\Controllers\HomeController;
+use App\Controllers\UsersController;
 
-// ── Public routes ─────────────────────────────────────────────────────────────
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
+/* Users Routes */
+Route::get('/users', [UsersController::class, 'index'])->name('userss.index');
+/* Auth Routes */
+Route::get('/auth/login', [UsersController::class, 'login'])->name('auth.login');
+Route::get('/auth/create', [UsersController::class, 'create'])->name('auth.create');
+Route::post('/auth/register', [UsersController::class, 'store'])->name('auth.register');
 
+Route::get('/users/{id}', [UsersController::class, 'show'])->name('userss.show');
+Route::get('/users/{id}/edit', [UsersController::class, 'edit'])->name('userss.edit');
+Route::put('/users/{id}', [UsersController::class, 'update'])->name('userss.update');
+Route::delete('/users/{id}', [UsersController::class, 'destroy'])->name('userss.destroy');
 
-
-// ── Routes ────────────────────────────────────────────────
-// web.php
-Route::get('/', [HomeController::class, 'index']);
-Route::get('/products', [HomeController::class, 'products'])->name('products.products');
-Route::get('/cart', [HomeController::class, 'cart'])->name('cart');
-Route::get('/checkout', [HomeController::class, 'checkout'])->name('checkout');
