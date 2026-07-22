@@ -94,6 +94,9 @@ RUN find /var/www/html -type f -exec chmod 644 {} \; && \
 COPY --chown=www-data:www-data docker-entrypoint.sh /usr/local/bin/
 RUN chmod +x /usr/local/bin/docker-entrypoint.sh
 
+# FIX: Grant www-data ownership of Apache configs so runtime sed commands work
+RUN chown -R www-data:www-data /etc/apache2 /var/run/apache2 /var/log/apache2
+
 # Drop to non-root for runtime
 USER www-data
 
