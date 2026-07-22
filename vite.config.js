@@ -2,7 +2,6 @@ import { defineConfig } from 'vite';
 import fs from 'fs';
 import path from 'path';
 import tailwindcss from '@tailwindcss/vite';
-import os from 'os';
 
 const hotFile = path.resolve('public/hot');
 
@@ -13,20 +12,6 @@ let cleanHandler = null;
 let sigintHandler = null;
 let sigtermHandler = null;
 
-function getLocalIP() {
-    const nets = os.networkInterfaces();
-    for (const name of Object.keys(nets)) {
-        for (const net of nets[name]) {
-            if (net.family === 'IPv4' && !net.internal) {
-                return net.address;
-            }
-        }
-    }
-    return 'localhost';
-}
-
-const localIP = getLocalIP();
-
 export default defineConfig({
     plugins: [
         tailwindcss(),
@@ -36,7 +21,7 @@ export default defineConfig({
 
             configureServer(server) {
                 server.httpServer?.once('listening', () => {
-                    fs.writeFileSync(hotFile, `http://${localIP}:5173`); // ← dynamic IP
+                    fs.writeFileSync(hotFile, `http://localhost:5173`);
                 });
 
                 const clean = () => {
@@ -99,19 +84,20 @@ export default defineConfig({
         outDir: 'public/build',
         manifest: true,
         rollupOptions: {
-            input: [
+           input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
+                'resources/js/safelist.js',  // ← dagdag
                 'resources/js/user_js/auth.js'
             ]
         }
     },
 
     server: {
-        host: '0.0.0.0',
+        host: 'localhost',
         port: 5173,
         hmr: {
-            host: localIP,  // ← dynamic IP, works sa phone at PC
+            host: 'localhost',
             port: 5173,
             overlay: true
         },

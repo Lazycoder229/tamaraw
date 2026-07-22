@@ -1,0 +1,46 @@
+# ── Secrets & environment ─────────────────────────────────────────────────
+.env
+.env.*
+*.pem
+*.key
+*.p12
+*.pfx
+
+# ── Git ───────────────────────────────────────────────────────────────────
+.git/
+.gitignore
+.gitattributes
+
+# ── Dependencies (rebuilt inside container) ───────────────────────────────
+node_modules/
+vendor/
+
+# ── Frontend build artifacts (built in Stage 1) ───────────────────────────
+public/build/
+
+# ── LitePHP storage (logs, cache, uploads) ────────────────────────────────
+storage/logs/
+storage/cache/
+storage/app/
+
+# ── .htaccess (rules are inlined in Apache config now) ───────────────────
+public/.htaccess
+
+# ── Docker files ─────────────────────────────────────────────────────────
+Dockerfile
+docker-compose*.yml
+.dockerignore
+
+# ── Dev & test ────────────────────────────────────────────────────────────
+tests/
+.phpunit*
+phpunit.xml*
+*.test.js
+
+# ── IDE & OS ──────────────────────────────────────────────────────────────
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
+npm-debug.log
+*.log

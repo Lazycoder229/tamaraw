@@ -1,9 +1,7 @@
 <?php $this->layout = 'layout.blank'; ?>
 
 <?php $this->currentSection = 'content'; ob_start(); ?>
-<!-- ============================================================ -->
-<!-- HEADER (simplified — brings user back home) -->
-<!-- ============================================================ -->
+
 <header class="w-full border-b border-zinc-200 bg-cream">
     <div class="max-w-7xl mx-auto px-4 py-3 flex items-center justify-between">
         <a href="/" class="flex items-center gap-3">
@@ -34,15 +32,7 @@
             <p class="mt-2 text-sm text-zinc-500">Connect directly with farmers and buyers across Oriental Mindoro.</p>
         </div>
 
-        <?php if (isset($errors) && count($errors)): ?>
-        <div class="mb-6 border border-red-200 bg-red-50 text-red-700 text-xs px-4 py-3">
-            <ul class="list-disc list-inside space-y-1">
-                <?php foreach ($errors as $error): ?>
-                <li><?= htmlspecialchars((string)($error), ENT_QUOTES, 'UTF-8') ?></li>
-                <?php endforeach; ?>
-            </ul>
-        </div>
-        <?php endif; ?>
+        
 
         <form action="<?= htmlspecialchars((string)(route('auth.register')), ENT_QUOTES, 'UTF-8') ?>" method="POST" enctype="multipart/form-data" class="bg-white border border-zinc-200 p-6 space-y-5">
             <?= csrf_field() ?>
@@ -52,13 +42,13 @@
                 <label class="block text-xs font-medium text-zinc-600 mb-2">I am a</label>
                 <div class="grid grid-cols-2 gap-2">
                     <label class="role-option cursor-pointer">
-                        <input type="radio" id="roleBuyer" name="role" value="buyer" class="peer sr-only" checked>
+                        <input type="radio" id="roleBuyer" name="role" value="buyer" class="peer sr-only" <?= htmlspecialchars((string)(old('role', 'buyer') === 'buyer' ? 'checked' : ''), ENT_QUOTES, 'UTF-8') ?>>
                         <div class="text-center px-3 py-3 text-sm border border-zinc-300 peer-checked:border-forest peer-checked:bg-forest/5 peer-checked:text-forest transition">
                             Buyer
                         </div>
                     </label>
                     <label class="role-option cursor-pointer">
-                        <input type="radio" id="roleFarmer" name="role" value="farmer" class="peer sr-only">
+                        <input type="radio" id="roleFarmer" name="role" value="farmer" class="peer sr-only" <?= htmlspecialchars((string)(old('role') === 'farmer' ? 'checked' : ''), ENT_QUOTES, 'UTF-8') ?>>
                         <div class="text-center px-3 py-3 text-sm border border-zinc-300 peer-checked:border-forest peer-checked:bg-forest/5 peer-checked:text-forest transition">
                             Farmer
                         </div>
@@ -72,23 +62,32 @@
                     <label for="first_name" class="block text-xs font-medium text-zinc-600 mb-1">First name</label>
                     <input type="text" id="first_name" name="first_name" required maxlength="100"
                            value="<?= htmlspecialchars((string)(old('first_name')), ENT_QUOTES, 'UTF-8') ?>"
-                           class="w-full px-3 py-2.5 text-sm border border-zinc-300 focus:outline-none focus:border-forest">
+                          class="w-full px-3 py-2.5 text-sm border focus:outline-none <?= htmlspecialchars((string)(hasError('first_name') ? 'border-red-400 focus:border-red-400' : 'border-zinc-300 focus:border-forest'), ENT_QUOTES, 'UTF-8') ?>">
+                    <?php if (hasError('first_name')): ?>
+                    <p class="text-red-500 text-xs mt-1"><?= htmlspecialchars((string)(errors('first_name')), ENT_QUOTES, 'UTF-8') ?></p>
+                    <?php endif; ?>
                 </div>
                 <div>
                     <label for="last_name" class="block text-xs font-medium text-zinc-600 mb-1">Last name</label>
                     <input type="text" id="last_name" name="last_name" required maxlength="100"
                            value="<?= htmlspecialchars((string)(old('last_name')), ENT_QUOTES, 'UTF-8') ?>"
-                           class="w-full px-3 py-2.5 text-sm border border-zinc-300 focus:outline-none focus:border-forest">
+                           class="w-full px-3 py-2.5 text-sm border <?= htmlspecialchars((string)(hasError('last_name') ? 'border-red-400' : 'border-zinc-300'), ENT_QUOTES, 'UTF-8') ?> focus:outline-none focus:border-forest">
+                    <?php if (hasError('last_name')): ?>
+                    <p class="text-red-500 text-xs mt-1"><?= htmlspecialchars((string)(errors('last_name')), ENT_QUOTES, 'UTF-8') ?></p>
+                    <?php endif; ?>
                 </div>
             </div>
 
             <!-- Email -->
             <div>
                 <label for="email" class="block text-xs font-medium text-zinc-600 mb-1">Email address</label>
-                <input type="email" id="email" name="email" required maxlength="150"
+                <input type="email" id="email" name="email" maxlength="150"
                        value="<?= htmlspecialchars((string)(old('email')), ENT_QUOTES, 'UTF-8') ?>"
                        placeholder="your@email.com"
-                       class="w-full px-3 py-2.5 text-sm border border-zinc-300 focus:outline-none focus:border-forest">
+                       class="w-full px-3 py-2.5 text-sm border <?= htmlspecialchars((string)(hasError('email') ? 'border-red-400' : 'border-zinc-300'), ENT_QUOTES, 'UTF-8') ?> focus:outline-none focus:border-forest">
+                <?php if (hasError('email')): ?>
+                <p class="text-red-500 text-xs mt-1"><?= htmlspecialchars((string)(errors('email')), ENT_QUOTES, 'UTF-8') ?></p>
+                <?php endif; ?>
             </div>
 
             <!-- Phone -->
@@ -99,7 +98,10 @@
                 <input type="tel" id="phone_number" name="phone_number" maxlength="20"
                        value="<?= htmlspecialchars((string)(old('phone_number')), ENT_QUOTES, 'UTF-8') ?>"
                        placeholder="09XX XXX XXXX"
-                       class="w-full px-3 py-2.5 text-sm border border-zinc-300 focus:outline-none focus:border-forest">
+                       class="w-full px-3 py-2.5 text-sm border <?= htmlspecialchars((string)(hasError('phone_number') ? 'border-red-400' : 'border-zinc-300'), ENT_QUOTES, 'UTF-8') ?> focus:outline-none focus:border-forest">
+                <?php if (hasError('phone_number')): ?>
+                <p class="text-red-500 text-xs mt-1"><?= htmlspecialchars((string)(errors('phone_number')), ENT_QUOTES, 'UTF-8') ?></p>
+                <?php endif; ?>
             </div>
 
             <!-- Password -->
@@ -107,7 +109,10 @@
                 <div>
                     <label for="password" class="block text-xs font-medium text-zinc-600 mb-1">Password</label>
                     <input type="password" id="password" name="password" required minlength="8"
-                           class="w-full px-3 py-2.5 text-sm border border-zinc-300 focus:outline-none focus:border-forest">
+                           class="w-full px-3 py-2.5 text-sm border <?= htmlspecialchars((string)(hasError('password') ? 'border-red-400' : 'border-zinc-300'), ENT_QUOTES, 'UTF-8') ?> focus:outline-none focus:border-forest">
+                    <?php if (hasError('password')): ?>
+                    <p class="text-red-500 text-xs mt-1"><?= htmlspecialchars((string)(errors('password')), ENT_QUOTES, 'UTF-8') ?></p>
+                    <?php endif; ?>
                 </div>
                 <div>
                     <label for="password_confirmation" class="block text-xs font-medium text-zinc-600 mb-1">Confirm</label>
@@ -135,7 +140,10 @@
                     <input type="text" id="farm_name" name="farm_name" maxlength="150"
                            value="<?= htmlspecialchars((string)(old('farm_name')), ENT_QUOTES, 'UTF-8') ?>"
                            placeholder="e.g. Dela Cruz Vegetable Farm"
-                           class="w-full px-3 py-2.5 text-sm border border-zinc-300 focus:outline-none focus:border-forest">
+                           class="w-full px-3 py-2.5 text-sm border <?= htmlspecialchars((string)(hasError('farm_name') ? 'border-red-400' : 'border-zinc-300'), ENT_QUOTES, 'UTF-8') ?> focus:outline-none focus:border-forest">
+                    <?php if (hasError('farm_name')): ?>
+                    <p class="text-red-500 text-xs mt-1"><?= htmlspecialchars((string)(errors('farm_name')), ENT_QUOTES, 'UTF-8') ?></p>
+                    <?php endif; ?>
                 </div>
 
                 <div>

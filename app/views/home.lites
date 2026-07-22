@@ -47,10 +47,10 @@
         
 
         <div class="pt-3 flex flex-col gap-2">
-            <a href="#" class="w-full text-center px-4 py-2 border border-zinc-300">
+             <a href="{{ route('auth.login') }}" class="w-full text-center px-4 py-2 border border-zinc-300">
                 Sign In
             </a>
-            <a href="#" class="w-full text-center px-4 py-2 bg-forest text-white">
+            <a href="{{ route('auth.create') }}" class="w-full text-center px-4 py-2 bg-forest text-white">
                 Join Free
             </a>
         </div>
@@ -126,8 +126,8 @@
           <p class="text-white/70 text-xs">Barangays Served</p>
         </div>
         <div>
-          <p class="font-semibold text-lg text-white">₱4.2M</p>
-          <p class="text-white/70 text-xs">Sales Facilitated</p>
+          <p class="font-semibold text-lg text-white">{{ $farmerCounts }}</p>
+          <p class="text-white/70 text-xs">Active Farmers</p>
         </div>
         <div>
           <p class="font-semibold text-lg text-white">{{ $usersCount }}</p>

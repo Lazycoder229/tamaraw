@@ -11,7 +11,7 @@ class CategoriesService
     {
         return Categories::all();
     }
-
+    
     // ── Find by ID ────────────────────────────────────────────────────────────
     public function find(int|string $id): mixed
     {

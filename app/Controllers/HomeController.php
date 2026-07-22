@@ -26,7 +26,8 @@ class HomeController extends Controller
 
        $products = $this->productsService->allWithImages(); // array ng Products, may imagePath
         $productsCount = $this->productsService->count();     // int lang, hiwalay
-
+        $farmerCounts = $this->usersService->countFarmers(); // int lang, hiwalay
+        
         $this->view('home', [
             'farmerProfiles' => $farmerProfiles,
             'farmerProfilesCount' => $farmerProfilesCount,
@@ -34,6 +35,7 @@ class HomeController extends Controller
             'categories' => $categories,
             'products' => $products,
             'productsCount' => $productsCount,
+            'farmerCounts' => $farmerCounts,
         ]);
     }
            

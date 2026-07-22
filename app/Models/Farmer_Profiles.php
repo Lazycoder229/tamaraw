@@ -27,8 +27,13 @@ class Farmer_Profiles extends Model
         'rating_count',         // computed din
     ];
 
-    public function user(): ?object
-    {
-        return $this->belongsTo(Users::class, 'user_id');
-    }
+   public function verificationDocuments()
+{
+    return $this->hasMany(Farmer_Verication_Documents::class, 'farmer_id');
+}
+
+public function user(): ?object
+{
+    return $this->belongsTo(Users::class, 'user_id');
+}
 }

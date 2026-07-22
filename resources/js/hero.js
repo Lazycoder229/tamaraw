@@ -26,6 +26,15 @@ function initHeroPage() {
     });
   }
 
+  // ── Auto-close mobile menu pag na-click ang isang link sa loob ──
+  if (mobileMenu) {
+    mobileMenu.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        mobileMenu.classList.add('hidden');
+      });
+    });
+  }
+
   // ── Farmer / Buyer hero toggle ──
   const toggleBtns = document.querySelectorAll('.hero-toggle-btn');
   const panels = {

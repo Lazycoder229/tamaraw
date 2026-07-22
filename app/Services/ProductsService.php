@@ -18,19 +18,19 @@ class ProductsService
     }
    
    public function allWithImages(): array
-{
-    $products = Products::with('images', 'category')->get();
+    {
+        $products = Products::with('images', 'category')->get();
 
-    foreach ($products as $product) {
-        $firstImage = $product->images[0] ?? null;
-        $product->imagePath = $firstImage->file_path ?? null;
+        foreach ($products as $product) {
+            $firstImage = $product->images[0] ?? null;
+            $product->imagePath = $firstImage->file_path ?? null;
 
-        $product->categoryName = $product->category->name ?? null;
-        $product->categorySlug = $product->category->slug ?? null;
+            $product->categoryName = $product->category->name ?? null;
+            $product->categorySlug = $product->category->slug ?? null;
+        }
+
+        return $products;
     }
-
-    return $products;
-}
     // ── Find by ID ────────────────────────────────────────────────────────────
     public function find(int|string $id): mixed
     {

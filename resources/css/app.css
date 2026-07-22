@@ -1,5 +1,7 @@
 @import "tailwindcss";
 
+@source "../../app/views/**/*.lites";
+
 @font-face {
     font-family: "Poppins";
     src: url("/assets/fonts/poppins-latin-400-normal.woff2") format("woff2");
@@ -45,6 +47,7 @@
   --font-display: "Playfair Display", Georgia, serif;
   --font-body:    "Inter", system-ui, sans-serif;
 }
+
 :root{
     --color-forest:    #1E5631;
   --color-cream:     #F5F0E8;

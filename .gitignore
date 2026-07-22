@@ -6,9 +6,16 @@ node_modules/
 .env
 
 # Generated files
-
 public/hot
+public/build/
 
+# Storage — generated/runtime files
+storage/logs/
+storage/cache/
+storage/framework/
+storage/uploads/*
+!storage/uploads/.gitkeep
 
 # OS files
 .DS_Store
+Thumbs.db
